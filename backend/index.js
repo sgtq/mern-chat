@@ -1,11 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
+import connect from "./configs/db.js";
 import { chats } from "./data/data.js";
+
+const app = express();
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
-
-const app = express();
 
 // Middlewares
 app.use(express.json());
@@ -38,5 +39,6 @@ app.use((err, req, res, next) => {
 */
 
 app.listen(PORT, () => {
+  connect();
   console.log("Server started on Port:", PORT);
 });
