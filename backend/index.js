@@ -2,6 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import connect from "./configs/db.js";
 import { chats } from "./data/data.js";
+import colors from "colors";
+
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -13,16 +16,7 @@ app.use(express.json());
 //app.use(cookieParser());
 
 // Routes
-app.get("/", (req, res, next) => {
-  res.send("Whaaaaa!");
-});
-app.get("/api/chat", (req, res, next) => {
-  res.send(chats);
-});
-app.get("/api/chat/:id", (req, res, next) => {
-  const singleChat = chats.find((c) => c._id === req.params.id);
-  res.send(singleChat);
-});
+app.use("/api/user", userRoutes);
 
 // Error Handling
 /*
@@ -40,5 +34,5 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   connect();
-  console.log("Server started on Port:", PORT);
+  console.log("Server started on Port:", PORT.yellow.bold);
 });

@@ -2,7 +2,10 @@ import mongoose from "mongoose";
 
 const connect = async () => {
   try {
-    mongoose.connect(process.env.MONGO_URI);
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   } catch (err) {
     console.error(err);
     throw err;
@@ -10,10 +13,10 @@ const connect = async () => {
 };
 
 mongoose.connection.on("disconnected", () => {
-  console.error("Database DISCONNECTED!");
+  console.error("Mongo Database DISCONNECTED!".red);
 });
 mongoose.connection.on("connected", () => {
-  console.log("Connected to Database!");
+  console.log("Connected to Mongo Database!".cyan.underline);
 });
 
 export default connect;
