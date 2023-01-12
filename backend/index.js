@@ -5,6 +5,7 @@ import { chats } from "./data/data.js";
 import colors from "colors";
 
 import userRoutes from "./routes/userRoutes.js";
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
@@ -19,18 +20,8 @@ app.use(express.json());
 app.use("/api/user", userRoutes);
 
 // Error Handling
-/*
-app.use((err, req, res, next) => {
-  const errorStatus = err.status || 500;
-  const errorMessage = err.message || "Something went wrong!";
-  return res.status(500).json({
-    success: false,
-    status: errorStatus,
-    message: errorMessage,
-    stack: err.stack,
-  });
-});
-*/
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   connect();
