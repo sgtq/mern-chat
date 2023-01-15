@@ -5,6 +5,7 @@ import { chats } from "./data/data.js";
 import colors from "colors";
 
 import userRoutes from "./routes/userRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -18,12 +19,13 @@ app.use(express.json());
 
 // Routes
 app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
 
 // Error Handling
 app.use(notFound);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  connect();
-  console.log("Server started on Port:", PORT.yellow.bold);
+    connect();
+    console.log("Server started on Port:", PORT.yellow.bold);
 });
