@@ -5,7 +5,8 @@ import { authValidate } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.route("/").get(authValidate, getAllUsers).post(register);
+router.get("/", authValidate, getAllUsers);
+router.post("/", register);
 router.post("/login", login);
 
 export default router;

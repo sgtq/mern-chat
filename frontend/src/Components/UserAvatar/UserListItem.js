@@ -7,9 +7,9 @@ const UserListItem = ({ user, handleFunction }) => {
             <Flex
                 onClick={handleFunction}
                 cursor="pointer"
-                bg="£e8e8e8"
+                bg="#e8e8e8"
                 _hover={{
-                    background: "£38b2ac",
+                    background: "#38b2ac",
                     color: "white",
                 }}
                 w="100%"

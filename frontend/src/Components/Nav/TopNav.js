@@ -13,8 +13,8 @@ import {
     MenuDivider,
     MenuItem,
     MenuList,
+    Spinner,
     Text,
-    Toast,
     Tooltip,
     useDisclosure,
     useToast,
@@ -85,7 +85,7 @@ const TopNav = () => {
 
     const accessChat = async (userId) => {
         try {
-            setLoading(true);
+            setLoadingChat(true);
 
             const config = {
                 headers: {
@@ -94,7 +94,11 @@ const TopNav = () => {
                 },
             };
 
-            const { data } = await axios.get(`/api/chat`, { userId }, config);
+            const { data } = await axios.post(`/api/chat`, { userId }, config);
+
+            if (!chats.find((c) => c._id === data._id)) {
+                setChats([data, ...chats]);
+            }
 
             setSelectedChat(data);
             setLoadingChat(false);
@@ -171,6 +175,7 @@ const TopNav = () => {
                                 <UserListItem key={user._id} user={user} handleFunction={() => accessChat(user._id)} />
                             ))
                         )}
+                        {loadingChat && <Spinner ml="auto" d="flex" />}
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
