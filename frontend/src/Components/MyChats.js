@@ -4,10 +4,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
 import ChatLoading from "./ChatLoading";
-import { getSender } from "../config/ChatLogics";
+import { Sender } from "../config/ChatLogics";
+import GroupChatModal from "./Misc/GroupChatModal.js";
 
 const MyChats = () => {
-    const [loggedUser, setLoggedUser] = useState();
+    const [loggedUser, setLoggedUser] = useState("");
     const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
     const toast = useToast();
@@ -65,9 +66,15 @@ const MyChats = () => {
                     alignItems="center"
                 >
                     My Chats
-                    <Button display="flex" fontSize={{ base: "17px", md: "10px", lg: "17px" }} rightIcon={<AddIcon />}>
-                        Group Chat
-                    </Button>
+                    <GroupChatModal>
+                        <Button
+                            display="flex"
+                            fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+                            rightIcon={<AddIcon />}
+                        >
+                            Group Chat
+                        </Button>
+                    </GroupChatModal>
                 </Box>
                 <Box
                     display="flex"
@@ -92,7 +99,7 @@ const MyChats = () => {
                                     borderRadius="lg"
                                     key={chat._id}
                                 >
-                                    <Text>{!chat.isGroupChat ? getSender(loggedUser, chat.users) : chat.chatName}</Text>
+                                    <Text>{!chat.isGroupChat ? Sender(loggedUser, chat.users) : chat.chatName}</Text>
                                 </Box>
                             ))}
                         </Stack>

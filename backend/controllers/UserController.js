@@ -12,6 +12,8 @@ export const getAllUsers = asyncHandler(async (req, res, next) => {
           }
         : {};
 
-    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } }); // Find user that NOT EQUAL to current logged in user
+    const users = await User.find(keyword)
+        .find({ _id: { $ne: req.user._id } })
+        .select("-password -isAdmin"); // Find user that NOT EQUAL to current logged in user
     res.send(users);
 });

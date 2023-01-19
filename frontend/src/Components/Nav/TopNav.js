@@ -26,7 +26,7 @@ import ProfileModal from "../Misc/ProfileModal";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ChatLoading from "../ChatLoading";
-import UserListItem from "../UserAvatar/UserListItem";
+import UserListItem from "../User/UserListItem";
 
 const TopNav = () => {
     const [search, setSearch] = useState("");
