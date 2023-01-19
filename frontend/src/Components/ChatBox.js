@@ -1,7 +1,9 @@
-import React from "react";
+import { Box } from "@chakra-ui/react";
+import { ChatState } from "../Context/ChatProvider";
 
 const ChatBox = () => {
-    return <div>ChatBox</div>;
+    const { user, selectedChat } = ChatState();
+    return <Box>Single Chat</Box>;
 };
 
 export default ChatBox;
