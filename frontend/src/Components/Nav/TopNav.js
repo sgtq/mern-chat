@@ -121,7 +121,7 @@ const TopNav = () => {
                 <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
                     <Button variant="ghost" onClick={onOpen}>
                         <i className="fas fa-search" />
-                        <Text d={{ base: "none", md: "flex" }} px={4}>
+                        <Text display={{ base: "none", md: "flex" }} px={4}>
                             Search Users
                         </Text>
                     </Button>

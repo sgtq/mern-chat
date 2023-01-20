@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/", authValidate, fetchChats);
 router.post("/", authValidate, accessChat);
 router.post("/group", authValidate, createGroupChat);
-router.put("/rename", authValidate, renameGroupChat);
+router.put("/group-rename", authValidate, renameGroupChat);
 router.put("/group-remove", authValidate, removeFromGroup);
 router.put("/group-add", authValidate, addToGroup);
 
