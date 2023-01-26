@@ -4,6 +4,7 @@ import connect from "./configs/db.js";
 import { chats } from "./data/data.js";
 import colors from "colors";
 import { Server } from "socket.io";
+import path from "path";
 
 import userRoutes from "./routes/userRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
@@ -23,6 +24,25 @@ app.use(express.json());
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
+
+// Deployment -----------------------
+
+// current working directory
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "prod") {
+    app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"));
+    });
+} else {
+    app.get("/", (req, res) => {
+        res.send("API is running Successfully");
+    });
+}
+
+// end Deployment -----------------------
 
 // Error Handling
 app.use(notFound);

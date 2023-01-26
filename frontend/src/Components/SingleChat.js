@@ -14,7 +14,7 @@ import ProfileModal from "./Misc/ProfileModal";
 import UpdateGroupChatModal from "./Misc/UpdateGroupChatModal";
 import ScrollableChat from "./ScrollableChat";
 
-const ENDPOINT = "http://localhost:5000"; // set temporarily
+const ENDPOINT = "http://localhost:5000"; // set temporarily. CHANGE FOR HEROKU LINK
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
